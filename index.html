@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+
+	<meta charset="utf-8">
+	<title>登录(Login)</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="./css/style.css">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+            <script src="assets/js/html5.js"></script>
+        <![endif]-->
+	<script type='text/javascript'>
+		var code; //在全局定义验证码   
+
+		function createCode() {
+			code = "";
+			var codeLength = 4;//验证码的长度   
+			var checkCode = document.getElementById("code");
+			var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+				'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');//随机数   
+			for (var i = 0; i < codeLength; i++) {//循环操作   
+				var index = Math.floor(Math.random() * 36);//取得随机数的索引（0~35）   
+				code += random[index];//根据索引取得随机数加到code上   
+			}
+			checkCode.value = code;//把code值赋给验证码   
+		}
+		
+	</script>
+	<style>
+		body {
+			transition: background-image 0.5s ease-in-out;
+		}
+
+		/* body.fade{
+		opacity: 0;
+	} */
+	</style>
+</head>
+
+<body onload='createCode()'>
+	<div class="page-container">
+		<h1>登录(Login)</h1>
+		<form action="./pages/handlePost.php" method="post">
+			<input type="text" name="username" class="username" id="username" placeholder="请输入您的用户名！"
+				style="width: 318px;">
+			<input type="password" name="password" class="password" id="password" placeholder="请输入您的用户密码！"
+				style="width: 318px;">
+			<input type="Captcha" class="Captcha" name="Captcha" id="captcha" placeholder="&nbsp;&nbsp;&nbsp;请输入验证码！">
+			<input type="button" id="code" onclick="createCode()" style="position: absolute;
+			left: 218px;
+			top: 134px;
+			height: 40px;
+			width: 131px;" title='点击更换验证码' />
+			<button type="submit" class="submit_button">登录</button>
+			<div style="font-size: 14px;line-height: 2em;">还没有创建账户？立刻<a href="./pages/register.html" style="text-decoration: none;color: rgb(52, 147, 219);">注册</a></div>
+			<div class="error"><span>+</span></div>
+		</form>
+
+	</div>
+
+	<!-- Javascript -->
+	<!-- <script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/js/supersized.3.2.7.min.js"></script>
+	<script src="assets/js/supersized-init.js"></script>
+	<script src="assets/js/scripts.js"></script> -->
+	<script src="./js/fetch_response.js"></script>
+	<script src="./js/change_image.js"></script>
+</body>
+
+</html>

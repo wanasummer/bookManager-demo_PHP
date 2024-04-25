@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <meta http-equiv='content-type' content='text/html;charset=utf-8' />
+    <script type='text/javascript'>
+        var code; //在全局定义验证码   
+
+        function createCode() {
+            code = "";
+            var codeLength = 4;//验证码的长度   
+            var checkCode = document.getElementById("code");
+            var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+                'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');//随机数   
+            for (var i = 0; i < codeLength; i++) {//循环操作   
+                var index = Math.floor(Math.random() * 36);//取得随机数的索引（0~35）   
+                code += random[index];//根据索引取得随机数加到code上   
+            }
+            checkCode.value = code;//把code值赋给验证码   
+        }
+        //校验验证码   
+        function validate() {
+            document.querySelector('form').addEventListener('submit', function (event) {
+                event.preventDefault(); // 阻止表单默认提交
+
+
+                var username = document.getElementById("username").value;
+                var name = document.getElementById("name").value;
+                var password = document.getElementById("password").value;
+                var password1 = document.getElementById("password1").value;
+                if (username == "") {
+                    alert("请输入用户名");
+                    return;
+                }
+                if (name == "") {
+                    alert("请输入姓名");
+                    return;
+                }
+                if (password != password1) {
+                    alert("密码前后不同！");
+                    return;
+                }
+                else if (password.length < 6) {
+                    alert("密码至少为6位！");
+                    return;
+                }
+                var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写         
+                if (inputCode.length <= 0) { //若输入的验证码长度为0   
+                    alert("请输入验证码！"); //则弹出请输入验证码   
+                    return;
+                } else if (inputCode != code) { //若输入的验证码与产生的验证码不一致时   
+                    alert("验证码输入错误!"); //则弹出验证码输入错误   
+                    createCode();//刷新验证码   
+                    document.getElementById("input").value = "";//清空文本框   
+                    return;
+                } else { //输入正确时   
+                    alert("注册成功");
+                    document.querySelector('form').submit();
+
+                }
+
+
+
+            });
+        } 
+    </script>
+    <style type='text/css'>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        #code {
+            font-family: Arial, 宋体;
+            font-style: italic;
+            color: blue;
+            size: 12px;
+            border: 0;
+            padding: 2px 3px;
+            letter-spacing: 8px;
+            font-weight: bolder;
+        }
+
+        body {
+            overflow: hidden;
+            background-image: url(../images/Books-library-GettyImages-842198916.jpg);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+        input {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+    </style>
+</head>
+
+<body onload='createCode()'>
+
+    <table border=0 style="margin: 185px auto;">
+        <tr>
+            <th>
+                <form action="./student_info_add.php" method="post">
+                    <table border=0 height=400>
+                        <tr>
+                            <th height=65 style="color: gainsboro;">
+                                <font size='4'>用 户 名
+                            </th>
+                            <th><input type="text" style="height:40px" placeholder="请输入用户名" size=40 name="username"
+                                    id="username">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th height=65 style="color: gainsboro;">
+                                <font size='4'>姓名
+                            </th>
+                            <th><input type="text" style="height: 40px;
+                                width: 189px;
+                                margin-left: -104px;" placeholder="请输入姓名" size=40 name="name" id="name">
+                            </th>
+                                <th height=65 style="color: gainsboro;">
+                                    <font size='4' style="margin-left: -151px;">性别
+                                </th>
+                                <th><select id="sex" name="sex" style="margin-left: -62px;">
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                </th>
+                        </tr>
+                        <tr>
+                            <th height=65 style="color: gainsboro;">
+                                <font size='4'>密 码
+                            </th>
+                            <th><input type="password" style="height:40px" placeholder="密码长度为6~20字符" size=40
+                                    name="password" id="password"></th>
+                        </tr>
+                        <tr>
+                            <th height=65 style="color: gainsboro;">
+                                <font size='4'>确认密码
+                            </th>
+                            <th><input type="password" style="height:40px" placeholder="请重新输入密码" size=40 id="password1">
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <div>
+                                <th>
+                                    <font size='4' style="color: gainsboro;">验 证 码
+                                </th>
+                                <th>
+                                    <input type="text" id="input" style="height:40px;width:211px" />
+                                    <input type="button" id="code" onclick="createCode()" style="height:40px;width:80px"
+                                        title='点击更换验证码' />
+                                    <!--<input type = "button"  style="height:40px"  value = "验证" onclick = "validate()"/> -->
+                                </th>
+                            </div>
+                        </tr>
+
+                        
+                        <tr>
+                            <th colspan=2 height=65><input type='submit'
+                                    style="background-color:red;height:55px;width:160px;font-size:25px;color:white;border:none"
+                                    value='注册' id='l' onclick="validate()"></th>
+                        </tr>
+                    </table>
+                </form>
+            </th>
+        </tr>
+    </table>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生信息添加</title>
+</head>
+
+<body>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <table style="margin: auto;">
+        <form action="student_info_add.php" method="post">
+            <tr>
+                <th colspan="3">学生信息添加</th>
+            </tr>
+            <tr>
+                <td>姓名</td>
+                <td><input type="text" name="name" style="width: 90px;"></td>
+                <td>性别<select id="sex" name="sex">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                </td>
+            </tr>
+            <tr>
+                <td>学号</td>
+                <td colspan="2"><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td colspan="2"><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <th colspan="3"><input type="submit" name="submit" value="提交"></th>
+            </tr>
+        </form>
+    </table>
+</body>
+
+</html>
